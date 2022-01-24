@@ -1,0 +1,109 @@
+body {
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+.todo-page {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    margin: 40px auto;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.todo-input-name {
+    border: 1px solid #BFB8CC;
+    border-radius: 4px;
+    width: 190px;
+    height: 30px;
+}
+
+.todo-input-date {
+    width: 35%;
+    background: #fff;
+    border: 1px solid #BFB8CC;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, .075);
+    border-radius: 3px;
+    color: #24292e;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 6px 8px;
+    height: 20px;
+}
+
+.todo-submit-button {
+    margin-top: 30px;
+    background-color: #28a745;
+    border: 1px solid rgba(27, 31, 35, .2);
+    width: 20%;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 2px;
+}
+
+.due_types {
+    font-family: OpenSans-Semibold;
+    font-size: 20px;
+    color: black;
+    letter-spacing: 0.1px;
+    width: 150px;
+    height: 19px;
+}
+
+.todo-list-name {
+    font-family: OpenSans;
+    font-size: 18px;
+    color: #453C52;
+    letter-spacing: 0.1px;
+    height: 19px;
+}
+
+.todo-list-date {
+    font-family: OpenSans;
+    font-size: 18px;
+    color: #453C52;
+    letter-spacing: 0.1px;
+    height: 19px;
+}
+
+.p-5 {
+    padding: 5px;
+}
+
+.p-10 {
+    padding-left: 10px;
+}
+
+.p-15 {
+    padding-left: 15px;
+}
+
+.pb-10 {
+    padding-bottom: 10px;
+}
+
+.pb-25 {
+    padding-bottom: 25px;
+}
+
+.h-20 {
+    height: 20px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.br-4 {
+    border-radius: 4px;
+}
+
+.lstyle-none {
+    list-style-type: none;
+}

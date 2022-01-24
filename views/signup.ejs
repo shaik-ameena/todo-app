@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <link href="../public/base.css" rel="stylesheet" type="text/css" />
+</head>
+<div class="wrapper">
+    <div class="title">
+        <p>Sign Up to Todo App</p>
+    </div>
+    <form action="/signup" method="post">
+        <div class="form">
+            <div class="input_field">
+                <label>email address</label>
+                <input type="text" class="input" name="email" value="<%= locals.signUpInputs?.email %> ">
+            </div>
+            <div class="input_field">
+                <label>Password</label>
+                <input type="password" class="input" name="password" value="<%= locals.signUpInputs?.password %>">
+            </div>
+            <div class="btn">
+                <input type="submit" value="Sign up" class="sign_btn">
+            </div>
+        </div>
+        <div class="create_act">
+            <p>Already have account? <a href="/signin">Login.</a></p>
+        </div>
+    </form>
+</div>
+
+</html>
