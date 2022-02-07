@@ -12,14 +12,15 @@
 <body>
     <div class="todo-page">
         <div class="pb-25">welcome
-            <%= locals.user?.email %>!!!
-                <a href="/signout">sign out</a>
+            <%= locals.user?locals.user.email:"" %>!!!
+                <a href="/user/signout">sign out</a>
         </div>
         <form action="/todos/new" method="post" class="pb-10">
             <input type="text" name="todoName" placeholder="what's next" required class="todo-input-name todo-input" />
             <input type="date" name="dueDate" required class="todo-input-date h-20 br-4" />
             <button type="submit" class="todo-submit-button">add</button>
         </form>
+        <% const todosLen = locals.userTodos.length %> 
         <% const due_calc_logic = ["due_days == 0","due_days==1","due_days > 1","due_days < 0","false"] %>
             <% const due_types = ["due today" ,"due tomorrow", "upcoming" , "overdue","completed"] %>
                 <% for(var j=0 ; j< due_types.length ; j++){ %>
@@ -28,7 +29,7 @@
                             <%= due_types[j] %>
                         </div>
                         <ul class="pl-15 lstyle-none">
-                            <% for(var i=0; i< locals.userTodos?.length ; i++){ %>
+                            <% for(var i=0; i< todosLen ; i++){ %>
                                 <%var due_days = moment(locals.userTodos[i].due_date).diff(moment().startOf('day'),'days') %>
                                     <% if((due_types[j]!="completed" && eval(due_calc_logic[j]) && !locals.userTodos[i].completed)
                                           ||(due_types[j]=="completed"&&locals.userTodos[i].completed)){ %>

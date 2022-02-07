@@ -1,44 +1,34 @@
 const express = require("express");
-const todoRouter = express.Router();
-const todoTable = require("../models/todo");
-const userTable = require("../models/user");
-const { isUserActive } = require("../middlewares/userValidations");
 const moment = require("moment");
+const todoRouter = express.Router();
+
+const { isUserActive } = require("../middlewares/user-validations");
+const {getAllTodos,saveTodo,deleteTodo,updateTodo} = require("../middlewares/todo-manager");
+
 
 //displaying all todos of current user
-todoRouter.get("/", isUserActive, async(req, res) => {
-    const user = await userTable.findOne({ where: { email: req.session.user } });
-    const userTodos = await todoTable.findAll({ where: { userId: user.id } });
-    req.userId = user.id;
-    res.render("todos", { moment: moment, userTodos: userTodos, user: { email: req.session.user } });
+todoRouter.get("/", isUserActive,getAllTodos, (req, res) => {
+    const {userTodos , userId , session} = req;
+    req.session.userId = userId;
+    res.render("todos", { moment, userTodos, user:{email:session.user }});
 });
 
 //posting new todo
-todoRouter.post("/new", async(req, res) => {
-    const user = await userTable.findOne({ where: { email: req.session.user } });
-    const userId = user.id;
-    const { todoName, dueDate } = req.body;
-    todoTable.create({ todo_name: todoName, due_date: dueDate, completed: false, userId: userId }).then(success => { //res.render("todos");
-        res.redirect("/todos");
-    }).catch(error =>
-        res.status(400).send("todo addition failed!!!"))
-
+todoRouter.post("/new",isUserActive,saveTodo,(req, res) => {
+    const {todo} = req;
+    todo ? res.redirect("/todos"):res.status(500).send("new todo addition failed!!!");
 });
 
 //deleting a todo
-todoRouter.post("/delete/:id", async(req, res) => {
-    const userId = req.params.id;
-    await todoTable.destroy({ where: { id: userId } }).then((success) =>
-        res.redirect("/todos")
-    ).catch(err => res.status(400).send("error"))
+todoRouter.post("/delete/:id",isUserActive,deleteTodo,(req, res) => {
+    const {delTodoRes} = req; 
+    delTodoRes?res.redirect("/todos"):res.status(400).send("todo deletion failed!!!");
 });
 
 //updating a todo
-todoRouter.post("/update/:id", async(req, res) => {
-    const userId = req.params.id;
-    await todoTable.update({ completed: req.body.completed == "on" ? true : false }, { where: { id: userId } }).then((success) =>
-        res.redirect("/todos")
-    ).catch(err => res.status(400).send("error"))
+todoRouter.post("/update/:id",isUserActive,updateTodo,(req, res) => {
+    const {updateTodoRes} = req; 
+    updateTodoRes?res.redirect("/todos"):res.status(400).send("todo updation failed!!!");
 });
 
 module.exports = todoRouter;

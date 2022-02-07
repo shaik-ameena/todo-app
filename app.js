@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const userRouter = require("./routes/user_routes");
-const todoRouter = require("./routes/todo_routes");
 const session = require("express-session");
 const { v4: uuidv4 } = require("uuid");
+
+const userRouter = require("./routes/user_routes");
+const todoRouter = require("./routes/todo_routes");
 
 //creating express instance
 const app = express();
@@ -25,11 +26,11 @@ app.get("/", (req, res) => {
     if (req.session.user != undefined) {
         res.redirect("/todos");
     } else {
-        res.render("signin");
+        res.redirect("/user/signin");
     }
 })
 
-app.use("/", userRouter);
+app.use("/user", userRouter);
 app.use("/todos", todoRouter);
 
 //starting express server
